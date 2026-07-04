@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Portal BI</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        📊
+
+        <h2>Portal BI</h2>
+
+        <p>Business Intelligence</p>
+
+    </div>
+
+    <button onclick="mostrarDashboard('LINK1','Ventas')">
+        📈 Ventas
+    </button>
+
+    <button onclick="mostrarDashboard('LINK2','Delivery Experience')">
+        🚚 Delivery Experience
+    </button>
+
+    <button onclick="mostrarDashboard('LINK3','NPS')">
+        😊 NPS
+    </button>
+
+    <button onclick="mostrarDashboard('LINK4','Hoja de Ruta')">
+        📦 Hoja de Ruta
+    </button>
+
+    <button onclick="mostrarDashboard('LINK5','Capacitaciones')">
+        👨‍🏫 Capacitaciones
+    </button>
+
+    <button onclick="mostrarDashboard('LINK6','KPIs')">
+        📊 KPIs
+    </button>
+
+</div>
+
+<div class="contenido">
+
+<div class="topbar">
+
+<h1 id="titulo">
+
+Bienvenido
+
+</h1>
+
+<div id="fecha"></div>
+
+</div>
+
+<iframe
+
+id="visor"
+
+src="LINK1"
+
+allowfullscreen>
+
+</iframe>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
