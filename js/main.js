@@ -16,7 +16,7 @@ const BLOCKS = [
     { id: 'A', name: 'Operación diaria',  desc: 'El día del conductor: antes, durante y después de la ruta', freq: 'Diario',           color: 'var(--blk-a)' },
     { id: 'B', name: 'Calidad y cliente', desc: 'Lo que recibe y percibe el cliente',                         freq: 'Diario / semanal', color: 'var(--blk-b)' },
     { id: 'C', name: 'Equipo empoderado', desc: 'Lo que ve y reporta el conductor',                           freq: 'Diario',           color: 'var(--blk-c)' },
-    { id: 'D', name: 'Gestión mensual',   desc: 'Costos, productividad y comparación',                        freq: 'Mensual',          color: 'var(--blk-d)' }
+    { id: 'D', name: 'Gestión mensual',   desc: 'Comparación con otros DC y entre conductores',                        freq: 'Mensual',          color: 'var(--blk-d)' }
 ];
 
 // =========================================================
@@ -30,7 +30,7 @@ const MODULES = [
         id: 'pre-ruta', block: 'A', icon: 'clock',
         title: 'Pre-Ruta', subtitle: 'Llegada → salida del DC', reqs: '1.1.1.x',
         reports: [
-            { id: 'tml-asistencia',     title: 'TML, asistencia y TI', url: PBI + 'eyJrIjoiZDgzMDBiYmItZDk0ZC00YzBjLTkzNTctZmE0MDFkOTQyY2IzIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
+            { id: 'tml-asistencia',     title: 'TML, asistencia y tiempo interno', url: PBI + 'eyJrIjoiZDgzMDBiYmItZDk0ZC00YzBjLTkzNTctZmE0MDFkOTQyY2IzIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
             { id: 'verificacion-carga', title: 'Verificación de carga', url: PBI + 'eyJrIjoiODVhNzdlNmUtM2UxNS00YTc1LWI0NmItYjc2Y2U3YzVmNmYxIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
         ],
         kpis: [
@@ -63,7 +63,10 @@ const MODULES = [
     {
         id: 'post-ruta', block: 'A', icon: 'return',
         title: 'Post-Ruta', subtitle: 'Retorno → check-out', reqs: '1.1.3.x',
-        reports: [],
+        reports: [
+            // mismo reporte que Pre-Ruta (TML, asistencia y tiempo interno)
+            { id: 'tiempo-interno', title: 'Tiempo interno', url: PBI + 'eyJrIjoiZDgzMDBiYmItZDk0ZC00YzBjLTkzNTctZmE0MDFkOTQyY2IzIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
+        ],
         kpis: [
             ['TL: entrada del camión → check-out vs meta', '1.1.3.4'],
             ['Desglose: liquidación, 5S, inspección de retorno, inventario', '1.1.3.3']
@@ -88,23 +91,37 @@ const MODULES = [
     },
     {
         id: 'nivel-servicio', block: 'B', icon: 'target',
-        title: 'Nivel de servicio', subtitle: 'Rechazos · In Full · On Time · RTM', reqs: '1.4.3.x · 1.4.4.x',
-        reports: [],
+        title: 'Nivel de servicio', subtitle: 'Rechazos · OTIF · T2 RTM', reqs: '1.4.2.x · 1.4.3.x · 1.4.4.x',
+        reports: [
+            { id: 'rechazos',        title: 'Rechazos',        url: PBI + 'eyJrIjoiZTRjYTgxNmEtZWI0OC00NzJmLTk5YjgtN2U3ZTRjM2NmZDI0IiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
+            { id: 'rechazos-diario', title: 'Rechazos diario', url: PBI + 'eyJrIjoiMjM5ZjhkOWYtZDU5Ni00ZTQ2LTgyYTctMGVkMjBiNzkxNjVlIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
+            // Reportes del área de trabajo (piden iniciar sesión con la cuenta corporativa).
+            // "url" = versión para insertar en la página · "open" = link original de Power BI
+            { id: 'otif', title: 'OTIF · In Full On Time',
+              url:  'https://app.powerbi.com/reportEmbed?reportId=f846f19a-e9ca-4545-bf9f-4539b50a90ac&groupId=a96bc930-831f-4176-8d43-26b4909b6c93&pageName=06bf4fddbb0d1c918492&autoAuth=true',
+              open: 'https://app.powerbi.com/groups/a96bc930-831f-4176-8d43-26b4909b6c93/reports/f846f19a-e9ca-4545-bf9f-4539b50a90ac/06bf4fddbb0d1c918492?language=es-419&experience=power-bi' },
+            { id: 't2-rtm', title: 'T2 RTM',
+              url:  'https://app.powerbi.com/reportEmbed?reportId=2d823f45-d224-4a4a-afcd-71a29e25885b&pageName=bc0d1c4b0c414b04fbb6&autoAuth=true',
+              open: 'https://app.powerbi.com/groups/me/reports/2d823f45-d224-4a4a-afcd-71a29e25885b/bc0d1c4b0c414b04fbb6?experience=power-bi' }
+        ],
         kpis: [
+            ['OTIF: In Full y On Time con sus causas', '1.4.3.6 · 1.4.4.2'],
+            ['% comunicaciones enviadas al cliente (en ruta, no planificado, ETA)', '1.4.2.3'],
             ['Rechazos por motivo, % modulados y resueltos por el conductor', '1.4.3.5'],
             ['KPI RTM 2T y problemas principales', '1.4.3.4'],
             ['In Full y sus causas', '1.4.3.6'],
             ['On Time: desviación por causa', '1.4.4.2'],
             ['Tendencia On Time', '1.4.4.5']
         ],
-        sources: 'SAP / RTM, CORE, ruteo', routine: 'Semanal con el enrutador'
+        sources: 'SAP / RTM, CORE, ruteo, mensajería', routine: 'Semanal con el enrutador'
     },
     {
         id: 'cliente', block: 'B', icon: 'star',
-        title: 'Experiencia del cliente', subtitle: 'NPS · RMD · reclamos · notificaciones', reqs: '1.4.1.x · 1.4.2.x · 1.5.1.x',
+        title: 'Experiencia del cliente', subtitle: 'NPS · RMD · reclamos · comunicación', reqs: '1.4.1.x · 1.4.2.x · 1.5.1.x',
         reports: [
-            { id: 'nps-rmd',          title: 'NPS, RMD y reclamos', url: PBI + 'eyJrIjoiZTM3ZWQ2N2UtOWNkZi00ZTE2LWI0ZWMtNzM4NjgwY2ZiMjFhIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
-            { id: 'notificacion-pdv', title: 'Notificación PDV',    url: PBI + 'eyJrIjoiOTcwMmRiZDUtNGVlYi00MTY4LWI5NzUtMWVkMjdmOGI1M2NiIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
+            { id: 'nps-rmd',              title: 'NPS, RMD y reclamos',          url: PBI + 'eyJrIjoiZTM3ZWQ2N2UtOWNkZi00ZTE2LWI0ZWMtNzM4NjgwY2ZiMjFhIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
+            { id: 'comunicacion-cliente', title: 'Comunicación con el cliente', url: PBI + 'eyJrIjoiZGJhNmEwZjMtNGM4OC00ZDFmLTkzYTYtZWNkOTM3ZDdlZmNjIiwidCI6IjZjNjJhOGE3LTIxNzktNDk0MS04NGFhLTdjOWJmYjNkZmVmNiIsImMiOjR9&pageName=ead499058ce02e90ea44' },
+            { id: 'notificacion-pdv',     title: 'Notificación PDV',             url: PBI + 'eyJrIjoiOTcwMmRiZDUtNGVlYi00MTY4LWI5NzUtMWVkMjdmOGI1M2NiIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
         ],
         kpis: [
             ['Califica mi entrega y quejas (todas las fuentes, ≤3★)', '1.4.1.2'],
@@ -135,20 +152,11 @@ const MODULES = [
 
     // ---------------- D · GESTIÓN MENSUAL ----------------
     {
-        id: 'finanzas', block: 'D', icon: 'coin',
-        title: 'Finanzas y productividad', subtitle: 'VLC · presupuesto · Productividad Total', reqs: '1.3.x',
-        reports: [],
-        kpis: [
-            ['VLC y VLC/HL: real vs presupuesto y vs LE', '1.3.1.1'],
-            ['Top 3 causas desfavorables con plan de acción', '1.3.1.2'],
-            ['Productividad Total (volumen / horas)', '1.3.1.4']
-        ],
-        sources: 'MALU, SCFD', routine: 'Mensual'
-    },
-    {
         id: 'benchmark', block: 'D', icon: 'bars',
-        title: 'Benchmark SKPI', subtitle: 'Ranking conductores y clúster', reqs: '1.5.2.x',
-        reports: [],
+        title: 'Benchmark SKPI', subtitle: 'Benchmark interno · ranking y clúster', reqs: '1.5.2.x',
+        reports: [
+            { id: 'benchmark-interno', title: 'Benchmark interno', url: PBI + 'eyJrIjoiMWRmMDdjNzUtMGE1MC00MGNlLTgyNzctOWFmODc5Y2UyMGY3IiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
+        ],
         kpis: [
             ['Ranking de conductores: mejores y peores (OWD)', '1.5.2.2'],
             ['Comparación con DC del clúster', '1.5.2.3'],
@@ -160,11 +168,11 @@ const MODULES = [
 
 // Rutinas que se muestran en la página de inicio (ids de módulo o de reporte)
 const ROUTINES = [
-    { when: 'Reunión matinal', icon: 'clock',    items: ['tml-asistencia', 'workstation', 'dqi', 'nivel-servicio'] },
-    { when: 'Durante el día',  icon: 'truck',    items: ['eta-secuencia', 'tiempo-mercado', 'notificacion-pdv'] },
-    { when: 'Cierre del día',  icon: 'return',   items: ['post-ruta', 'verificacion-carga'] },
-    { when: 'Semanal',         icon: 'calendar', items: ['adherencia-km-hr', 'roturas-faltantes', 'nps-rmd'] },
-    { when: 'Mensual',         icon: 'calendar', items: ['retroalimentacion', 'cinco-porques', 'finanzas', 'benchmark'] }
+    { when: 'Reunión matinal', icon: 'clock',    items: ['tml-asistencia', 'workstation', 'dqi', 'rechazos-diario'] },
+    { when: 'Durante el día',  icon: 'truck',    items: ['eta-secuencia', 'tiempo-mercado', 'notificacion-pdv', 'comunicacion-cliente'] },
+    { when: 'Cierre del día',  icon: 'return',   items: ['tiempo-interno', 'verificacion-carga'] },
+    { when: 'Semanal',         icon: 'calendar', items: ['otif', 't2-rtm', 'rechazos', 'adherencia-km-hr', 'roturas-faltantes', 'nps-rmd'] },
+    { when: 'Mensual',         icon: 'calendar', items: ['retroalimentacion', 'cinco-porques', 'benchmark-interno'] }
 ];
 
 const REFRESH_TIME = 5 * 60 * 1000;   // auto-actualizar cada 5 min
@@ -190,15 +198,28 @@ const store = {
 };
 const blockOf = (m) => BLOCKS.find(b => b.id === m.block);
 const viewUrl = (i) => (i !== null && VIEWS[i] && VIEWS[i].r && VIEWS[i].r.url) ? VIEWS[i].r.url.trim() : '';
+const viewOpenUrl = (i) => (VIEWS[i] && VIEWS[i].r && VIEWS[i].r.open) ? VIEWS[i].r.open : buildUrl(viewUrl(i));
 const viewTitle = (i) => VIEWS[i].r ? VIEWS[i].r.title : VIEWS[i].m.title;
 const firstViewOf = (moduleId) => VIEWS.findIndex(v => v.m.id === moduleId);
 const viewByKey = (key) => { const i = VIEWS.findIndex(v => v.key === key); return i >= 0 ? i : firstViewOf(key); };
 const icon = (name, cls = 'i') => `<svg class="${cls}"><use href="#i-${name}"/></svg>`;
 
-// Agrega navContentPaneEnabled=false para ocultar la barra de páginas de Power BI
+// Convierte el link al formato que se puede mostrar dentro de la página:
+//  · Links "Publicar en web" (view?r=...)  → se usan tal cual
+//  · Links de área de trabajo (groups/.../reports/...) → reportEmbed (pide inicio de sesión corporativo)
+// y agrega navContentPaneEnabled=false para ocultar la barra de páginas.
+function toEmbed(url) {
+    const m = url.match(/app\.powerbi\.com\/groups\/([^/]+)\/reports\/([0-9a-f-]{36})(?:\/([^/?#]+))?/i);
+    if (!m) return url;
+    const [, group, report, page] = m;
+    let u = 'https://app.powerbi.com/reportEmbed?reportId=' + report + '&autoAuth=true';
+    if (group && group.toLowerCase() !== 'me') u += '&groupId=' + group;
+    if (page && !/^reportsection$/i.test(page)) u += '&pageName=' + page;
+    return u;
+}
 function buildUrl(url, bust) {
     if (!url) return '';
-    let u = url.trim();
+    let u = toEmbed(url.trim());
     if (!/navContentPaneEnabled=/i.test(u)) u += (u.includes('?') ? '&' : '?') + 'navContentPaneEnabled=false';
     if (bust) u += '&_t=' + Date.now();
     return u;
@@ -475,12 +496,12 @@ function refreshCurrent(bust = false) {
 
 function openInNewTab() {
     if (!viewUrl(current)) return;
-    window.open(buildUrl(viewUrl(current)), '_blank', 'noopener');
+    window.open(viewUrl(current), '_blank', 'noopener');
 }
 
 function copyLink() {
     if (!viewUrl(current)) return;
-    const url = buildUrl(viewUrl(current));
+    const url = viewUrl(current);
     const done = () => toast('Link copiado');
     if (navigator.clipboard) navigator.clipboard.writeText(url).then(done).catch(() => fallbackCopy(url, done));
     else fallbackCopy(url, done);

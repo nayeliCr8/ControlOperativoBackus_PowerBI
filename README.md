@@ -10,20 +10,26 @@ Centro de control con los 9 dashboards del pilar Delivery (DPO 2026), organizado
    ```
    `PBI` ya contiene `https://app.powerbi.com/view?r=`, así que solo pegas lo que va después de `r=`.
    También puedes pegar el link completo en `url: 'https://...'`.
+
+   **Tipos de link que acepta:**
+   - *Publicar en web* (`app.powerbi.com/view?r=...`): lo ve cualquiera que tenga el link.
+   - *Link del área de trabajo* (`app.powerbi.com/groups/.../reports/...`): la página lo convierte sola a
+     formato incrustado y pide iniciar sesión con la cuenta corporativa. Solo lo ven quienes tienen acceso al reporte.
 3. Si un módulo tiene `reports: []`, aparece como "Pendiente".
 
 ## Organización actual
 | Bloque | Módulo | Reportes |
 |---|---|---|
-| A · Operación diaria | Pre-Ruta | TML, asistencia y TI · Verificación de carga |
+| A · Operación diaria | Pre-Ruta | TML, asistencia y tiempo interno · Verificación de carga |
 | A · Operación diaria | En Ruta | ETA, secuencia y tiempo de servicio · Adherencia KM y HR · Tiempo de mercado, PNP y tiempos |
-| A · Operación diaria | Post-Ruta | *Pendiente* |
+| A · Operación diaria | Post-Ruta | Tiempo interno (mismo reporte que Pre-Ruta) |
 | B · Calidad y cliente | Calidad de entrega | DQI · Roturas y faltantes |
-| B · Calidad y cliente | Nivel de servicio | *Pendiente* |
-| B · Calidad y cliente | Experiencia del cliente | NPS, RMD y reclamos · Notificación PDV |
+| B · Calidad y cliente | Nivel de servicio | Rechazos · Rechazos diario · OTIF · T2 RTM |
+| B · Calidad y cliente | Experiencia del cliente | NPS, RMD y reclamos · Comunicación con el cliente · Notificación PDV |
 | C · Equipo empoderado | Equipo del conductor | Workstation · Retroalimentación · 5 porqués |
-| D · Gestión mensual | Finanzas y productividad | *Pendiente* |
-| D · Gestión mensual | Benchmark SKPI | *Pendiente* |
+| D · Gestión mensual | Benchmark SKPI | Benchmark interno |
+
+OTIF y T2 RTM son reportes del área de trabajo: usan `url` (versión para insertar, pide iniciar sesión) y `open` (link original para "Abrir en Power BI").
 
 Puedes abrir un reporte directo con `index.html#dqi`, `index.html#workstation`, etc.
 

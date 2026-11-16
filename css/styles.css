@@ -18,9 +18,9 @@
 
     /* colores por bloque */
     --blk-a: #F5E003;   /* Operación diaria  */
-    --blk-b: #38BDF8;   /* Calidad & cliente */
-    --blk-c: #A78BFA;   /* Equipo            */
-    --blk-d: #34D399;   /* Gestión mensual   */
+    --blk-b: #F5E003;   /* Calidad & cliente */
+    --blk-c: #F5E003;   /* Equipo            */
+    --blk-d: #F5E003;   /* Gestión mensual   */
 
     --sb-w: 288px;
     --sb-w-mini: 76px;
