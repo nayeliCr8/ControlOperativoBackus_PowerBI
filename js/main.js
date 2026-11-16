@@ -31,7 +31,8 @@ const MODULES = [
         title: 'Pre-Ruta', subtitle: 'Llegada → salida del DC', reqs: '1.1.1.x',
         reports: [
             { id: 'tml-asistencia',     title: 'TML, asistencia y tiempo interno', url: PBI + 'eyJrIjoiZDgzMDBiYmItZDk0ZC00YzBjLTkzNTctZmE0MDFkOTQyY2IzIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
-            { id: 'verificacion-carga', title: 'Verificación de carga', url: PBI + 'eyJrIjoiODVhNzdlNmUtM2UxNS00YTc1LWI0NmItYjc2Y2U3YzVmNmYxIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
+            { id: 'verificacion-carga', title: 'Verificación de carga', url: PBI + 'eyJrIjoiODVhNzdlNmUtM2UxNS00YTc1LWI0NmItYjc2Y2U3YzVmNmYxIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
+            { id: 'tiempo-checklist-verificacion', title: 'Tiempo de checklist y verificación de carga', url: PBI + 'eyJrIjoiZmMxOGZiMGUtYzFlNi00NTNkLWJkYWQtZGMyM2M5YzgyNWE3IiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
         ],
         kpis: [
             ['Tiempo de salida pre-ruta (TML) vs meta, por etapa', '1.1.1.7'],
@@ -117,13 +118,15 @@ const MODULES = [
     },
     {
         id: 'cliente', block: 'B', icon: 'star',
-        title: 'Experiencia del cliente', subtitle: 'NPS · RMD · reclamos · comunicación', reqs: '1.4.1.x · 1.4.2.x · 1.5.1.x',
+        title: 'Experiencia del cliente', subtitle: 'NPS · RMD · comunicación · capacitaciones', reqs: '1.4.1.x · 1.4.2.x · 1.5.1.x',
         reports: [
             { id: 'nps-rmd',              title: 'NPS, RMD y reclamos',          url: PBI + 'eyJrIjoiZTM3ZWQ2N2UtOWNkZi00ZTE2LWI0ZWMtNzM4NjgwY2ZiMjFhIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
             { id: 'comunicacion-cliente', title: 'Comunicación con el cliente', url: PBI + 'eyJrIjoiZGJhNmEwZjMtNGM4OC00ZDFmLTkzYTYtZWNkOTM3ZDdlZmNjIiwidCI6IjZjNjJhOGE3LTIxNzktNDk0MS04NGFhLTdjOWJmYjNkZmVmNiIsImMiOjR9&pageName=ead499058ce02e90ea44' },
-            { id: 'notificacion-pdv',     title: 'Notificación PDV',             url: PBI + 'eyJrIjoiOTcwMmRiZDUtNGVlYi00MTY4LWI5NzUtMWVkMjdmOGI1M2NiIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
+            { id: 'notificacion-pdv',     title: 'Notificación PDV',             url: PBI + 'eyJrIjoiOTcwMmRiZDUtNGVlYi00MTY4LWI5NzUtMWVkMjdmOGI1M2NiIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' },
+            { id: 'capacitaciones', title: 'Capacitaciones', url: PBI + 'eyJrIjoiZmVkN2VlZTEtNjNiMi00NGNiLWJiNzctZjZkNWMyZDQzNDlkIiwidCI6Ijk4MjAxZmVmLWQ5ZjYtNGU2OC04NGY1LWMyNzA1MDc0ZTM0MiIsImMiOjR9' }
         ],
         kpis: [
+            ['Capacitación en atención al cliente y manejo de quejas', '1.4.1.1'],
             ['Califica mi entrega y quejas (todas las fuentes, ≤3★)', '1.4.1.2'],
             ['Tiempo promedio de cierre de RMD', '1.4.1.5'],
             ['% comunicaciones enviadas por tipo (en ruta, no planificado, ETA)', '1.4.2.3'],
@@ -170,9 +173,9 @@ const MODULES = [
 const ROUTINES = [
     { when: 'Reunión matinal', icon: 'clock',    items: ['tml-asistencia', 'workstation', 'dqi', 'rechazos-diario'] },
     { when: 'Durante el día',  icon: 'truck',    items: ['eta-secuencia', 'tiempo-mercado', 'notificacion-pdv', 'comunicacion-cliente'] },
-    { when: 'Cierre del día',  icon: 'return',   items: ['tiempo-interno', 'verificacion-carga'] },
+    { when: 'Cierre del día',  icon: 'return',   items: ['tiempo-interno', 'verificacion-carga', 'tiempo-checklist-verificacion'] },
     { when: 'Semanal',         icon: 'calendar', items: ['otif', 't2-rtm', 'rechazos', 'adherencia-km-hr', 'roturas-faltantes', 'nps-rmd'] },
-    { when: 'Mensual',         icon: 'calendar', items: ['retroalimentacion', 'cinco-porques', 'benchmark-interno'] }
+    { when: 'Mensual',         icon: 'calendar', items: ['retroalimentacion', 'cinco-porques', 'capacitaciones', 'benchmark-interno'] }
 ];
 
 const REFRESH_TIME = 5 * 60 * 1000;   // auto-actualizar cada 5 min

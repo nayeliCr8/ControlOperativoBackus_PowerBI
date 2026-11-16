@@ -20,12 +20,12 @@ Centro de control con los 9 dashboards del pilar Delivery (DPO 2026), organizado
 ## Organización actual
 | Bloque | Módulo | Reportes |
 |---|---|---|
-| A · Operación diaria | Pre-Ruta | TML, asistencia y tiempo interno · Verificación de carga |
+| A · Operación diaria | Pre-Ruta | TML, asistencia y tiempo interno · Verificación de carga · Tiempo de checklist y verificación de carga |
 | A · Operación diaria | En Ruta | ETA, secuencia y tiempo de servicio · Adherencia KM y HR · Tiempo de mercado, PNP y tiempos |
 | A · Operación diaria | Post-Ruta | Tiempo interno (mismo reporte que Pre-Ruta) |
 | B · Calidad y cliente | Calidad de entrega | DQI · Roturas y faltantes |
 | B · Calidad y cliente | Nivel de servicio | Rechazos · Rechazos diario · OTIF · T2 RTM |
-| B · Calidad y cliente | Experiencia del cliente | NPS, RMD y reclamos · Comunicación con el cliente · Notificación PDV |
+| B · Calidad y cliente | Experiencia del cliente | NPS, RMD y reclamos · Comunicación con el cliente · Notificación PDV · Capacitaciones (1.4.1) |
 | C · Equipo empoderado | Equipo del conductor | Workstation · Retroalimentación · 5 porqués |
 | D · Gestión mensual | Benchmark SKPI | Benchmark interno |
 
