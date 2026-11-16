@@ -217,7 +217,8 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 
 /* ---------- Sidebar colapsado (solo iconos) ---------- */
 /* Panel oculto por completo */
-.sidebar > * { min-width: var(--sb-w); }
+.sb-brand, .sb-nav, .sb-footer { min-width: var(--sb-w); }
+.sb-search { min-width: calc(var(--sb-w) - 34px); }
 .sb-collapsed .sidebar { width: 0; border-right-width: 0; }
 .sb-collapsed .sidebar::before { display: none; }
 
@@ -652,3 +653,67 @@ kbd + kbd { margin-left: 0; }
     .info-panel.open { position: absolute; right: 0; top: 0; bottom: 0; z-index: 6; box-shadow: -10px 0 30px rgba(0,0,0,.2); }
     .footer { padding: 0 14px; }
 }
+
+/* =========================================================
+   MÓDULOS CON VARIOS REPORTES
+   ========================================================= */
+.nav-module + .nav-module { margin-top: 2px; }
+.nav-reports {
+    position: relative;
+    margin: 0 0 6px 29px; padding-left: 14px;
+    border-left: 1px solid var(--sb-border);
+    display: flex; flex-direction: column; gap: 1px;
+}
+.nav-report {
+    position: relative;
+    text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-size: 12.5px; color: var(--sb-muted);
+    padding: 7px 10px; border-radius: 8px;
+    transition: background .15s, color .15s;
+}
+.nav-report::before {
+    content: ""; position: absolute; left: -15px; top: 50%; width: 9px; height: 1px; background: var(--sb-border);
+}
+.nav-report:hover { color: #fff; background: var(--sb-hover); }
+.nav-report.active { color: var(--navy); background: var(--yellow); font-weight: 700; }
+.nav-report.active::before { background: var(--yellow); }
+.nav-module.open > .nav-item .nav-ico { color: var(--yellow); background: var(--yellow-soft); }
+.nav-module.open > .nav-item b { color: #fff; }
+
+/* pestañas dentro del dashboard */
+.dash-tabs {
+    display: flex; gap: 4px; overflow-x: auto;
+    padding: 8px 16px 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+.dash-tab {
+    flex-shrink: 0;
+    padding: 9px 14px 10px;
+    font-size: 13px; font-weight: 600; color: var(--text-2);
+    border-bottom: 3px solid transparent;
+    border-radius: 8px 8px 0 0;
+    transition: all .15s;
+}
+.dash-tab:hover { color: var(--text); background: var(--surface-2); }
+.dash-tab.active { color: var(--text); border-bottom-color: var(--yellow); }
+.dash-bar { border-bottom: 0; }
+.dash-tabs.hidden + .dash-body { border-top: 1px solid var(--border); }
+
+/* tarjetas del inicio */
+.card { cursor: pointer; }
+.card-reports { display: flex; flex-direction: column; gap: 6px; }
+.card-report {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 11px; border-radius: 9px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    font-size: 12.5px; font-weight: 600; color: var(--text); text-align: left;
+    transition: all .15s;
+}
+.card-report span { flex: 1; }
+.card-report .i:first-child { color: var(--c); }
+[data-theme="light"] .card-report .i:first-child { color: var(--text-2); }
+.card-report .i:last-child { color: var(--muted); transition: transform .15s; }
+.card-report:hover { border-color: var(--c); background: color-mix(in srgb, var(--c) 10%, var(--surface)); }
+.card-report:hover .i:last-child { transform: translateX(3px); color: var(--text); }
+.chip-pending { opacity: .6; border-style: dashed; }

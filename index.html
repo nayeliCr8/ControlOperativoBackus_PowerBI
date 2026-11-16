@@ -40,7 +40,7 @@
         <div class="sb-footer">
             <div class="sb-progress">
                 <div class="sb-progress-top">
-                    <span>Links configurados</span>
+                    <span>Módulos con reporte</span>
                     <b id="linksCount">0/9</b>
                 </div>
                 <div class="bar"><i id="linksBar"></i></div>
@@ -78,12 +78,12 @@
                 <div>
                     <p class="eyebrow">DPO 2026 · Pilar Delivery</p>
                     <h1>Centro de control de entrega</h1>
-                    <p class="hero-sub">9 dashboards organizados por el día del conductor y la gestión del DC. Elige un módulo del panel o de las tarjetas.</p>
+                    <p class="hero-sub">Tus reportes de Power BI organizados por el día del conductor y la gestión del DC. Elige un módulo del panel o de las tarjetas.</p>
                 </div>
                 <div class="hero-stats">
                     <div class="stat"><b>4</b><span>Bloques</span></div>
-                    <div class="stat"><b>9</b><span>Dashboards</span></div>
-                    <div class="stat"><b id="heroLinks">0</b><span>Con link</span></div>
+                    <div class="stat"><b id="heroModules">9</b><span>Módulos</span></div>
+                    <div class="stat"><b id="heroLinks">0</b><span>Reportes</span></div>
                 </div>
             </section>
 
@@ -128,6 +128,7 @@
                         <button class="open-btn" id="btnOpen" title="Abrir en Power BI"><svg class="i"><use href="#i-external"/></svg><span>Abrir en Power BI</span></button>
                     </div>
                 </div>
+                <div class="dash-tabs" id="dashTabs"></div>
 
                 <div class="dash-body">
                   <div class="frame-area" id="frameArea">
@@ -145,8 +146,8 @@
                     <!-- Link pendiente -->
                     <div class="state empty" id="emptyState">
                         <div class="state-icon"><svg class="i"><use href="#i-link"/></svg></div>
-                        <h3>Link de Power BI pendiente</h3>
-                        <p>Pega el link de este dashboard en <code>js/main.js</code>, en el campo <code>url</code> del módulo <code id="emptyId"></code>.</p>
+                        <h3>Este módulo aún no tiene reporte</h3>
+                        <p>Agrega el link en <code>js/main.js</code>, dentro de <code>reports</code> del módulo <code id="emptyId"></code>. Esto es lo que debería mostrar:</p>
                         <ul class="empty-kpis" id="emptyKpis"></ul>
                     </div>
 
@@ -181,7 +182,7 @@
                     <!-- KPIs del módulo -->
                     <aside class="info-panel" id="infoPanel">
                         <div class="ip-head">
-                            <b>Qué debe mostrar</b>
+                            <b>Qué debe mostrar el módulo</b>
                             <button class="icon-btn sm" id="infoClose"><svg class="i"><use href="#i-x"/></svg></button>
                         </div>
                         <ul id="infoKpis"></ul>
